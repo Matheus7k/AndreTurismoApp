@@ -21,5 +21,8 @@ namespace AndreTurismoApp.Models.DTOs
 
         [JsonProperty("complemento")]
         public string complemento { get; set; }
+
+        [JsonProperty("cep")]
+        public string cep { get; set; }
     }
 }

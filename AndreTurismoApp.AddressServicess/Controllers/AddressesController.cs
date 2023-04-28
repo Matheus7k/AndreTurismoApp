@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.AddressService.Data;
 using AndreTurismoApp.Models;
-using AndreTurismoApp.Models.DTOs;
 using AndreTurismoApp.Services;
+using AndreTurismoApp.Models.DTOs;
 
 namespace AndreTurismoApp.AddressService.Controllers
 {
@@ -87,7 +87,7 @@ namespace AndreTurismoApp.AddressService.Controllers
 
         // POST: api/Addresses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost(Name = "Create Address")]
+        [HttpPost]
         public async Task<ActionResult<Address>> PostAddress(CreateAddressDTO createAddressDTO)
         {
             if (_context.Address == null)
@@ -95,18 +95,7 @@ namespace AndreTurismoApp.AddressService.Controllers
                 return Problem("Entity set 'AndreTurismoAppAddressServiceContext.Address'  is null.");
             }
 
-            AddressDTO addressDto = _postOfficeService.GetCep(createAddressDTO.CEP).Result;
-
-            Address fullAddress = new(addressDto);
-
-            fullAddress.Complement = addressDto.complemento;
-            fullAddress.Neighborhood = addressDto.bairro;
-            fullAddress.Number = createAddressDTO.Number;           
-
-            _context.Address.Add(fullAddress);
-            await _context.SaveChangesAsync();
-
-            return fullAddress;
+            
         }
 
         // DELETE: api/Addresses/5

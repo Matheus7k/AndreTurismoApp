@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp", "AndreTurismoApp\AndreTurismoApp.csproj", "{89900503-95C0-4A1D-8329-0636F32E9AF4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp", "AndreTurismoApp\AndreTurismoApp.csproj", "{89900503-95C0-4A1D-8329-0636F32E9AF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.Models", "AndreTurismoApp.Models\AndreTurismoApp.Models.csproj", "{65F78152-8C51-4809-8803-9B93F3849886}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.Models", "AndreTurismoApp.Models\AndreTurismoApp.Models.csproj", "{65F78152-8C51-4809-8803-9B93F3849886}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.Repositories", "AndreTurismoApp.Repositories\AndreTurismoApp.Repositories.csproj", "{450269EE-B104-4BE8-9447-798CC2ABDAE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.Repositories", "AndreTurismoApp.Repositories\AndreTurismoApp.Repositories.csproj", "{450269EE-B104-4BE8-9447-798CC2ABDAE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.Services", "AndreTurismoApp.Services\AndreTurismoApp.Services.csproj", "{959E2E93-9FDE-489B-8E28-026315903C44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.Services", "AndreTurismoApp.Services\AndreTurismoApp.Services.csproj", "{959E2E93-9FDE-489B-8E28-026315903C44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.AddressService", "AndreTurismoApp.AddressService\AndreTurismoApp.AddressService.csproj", "{100BCA0A-A923-4215-8482-24A8C308FDDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.AddressService", "AndreTurismoApp.AddressService\AndreTurismoApp.AddressService.csproj", "{1F982A28-6827-42A9-883F-3F3CC44CFA77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{959E2E93-9FDE-489B-8E28-026315903C44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{959E2E93-9FDE-489B-8E28-026315903C44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{959E2E93-9FDE-489B-8E28-026315903C44}.Release|Any CPU.Build.0 = Release|Any CPU
-		{100BCA0A-A923-4215-8482-24A8C308FDDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{100BCA0A-A923-4215-8482-24A8C308FDDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{100BCA0A-A923-4215-8482-24A8C308FDDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{100BCA0A-A923-4215-8482-24A8C308FDDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F982A28-6827-42A9-883F-3F3CC44CFA77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F982A28-6827-42A9-883F-3F3CC44CFA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F982A28-6827-42A9-883F-3F3CC44CFA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F982A28-6827-42A9-883F-3F3CC44CFA77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
