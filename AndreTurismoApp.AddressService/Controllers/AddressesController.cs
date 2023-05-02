@@ -54,6 +54,19 @@ namespace AndreTurismoApp.AddressService.Controllers
             return address;
         }
 
+        [HttpGet("/api/Addresses/cep/{cep}", Name = "Get By CEP")]
+        public async Task<Address> GetAddressCEP(string cep)
+        {
+            AddressDTO addressDto = _postOfficeService.GetCep(cep).Result;
+
+            Address fullAddress = new(addressDto);
+
+            fullAddress.Complement = addressDto.complemento;
+            fullAddress.Neighborhood = addressDto.bairro;
+
+            return fullAddress;
+        }
+
         // PUT: api/Addresses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -82,7 +95,7 @@ namespace AndreTurismoApp.AddressService.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok();
         }
 
         // POST: api/Addresses
@@ -101,7 +114,8 @@ namespace AndreTurismoApp.AddressService.Controllers
 
             fullAddress.Complement = addressDto.complemento;
             fullAddress.Neighborhood = addressDto.bairro;
-            fullAddress.Number = createAddressDTO.Number;           
+            fullAddress.Number = createAddressDTO.Number;
+            fullAddress.DateCreated = DateTime.Now;
 
             _context.Address.Add(fullAddress);
             await _context.SaveChangesAsync();
