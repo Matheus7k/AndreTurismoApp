@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AndreTurismoApp.Models.DTOs;
 
 namespace AndreTurismoApp.Models
 {
@@ -20,5 +21,17 @@ namespace AndreTurismoApp.Models
         public string Complement { get; set; }
         public DateTime DateCreated { get; set; }
         public City City { get; set; }
+
+        public Address()
+        {
+            
+        }
+
+        public Address(AddressDTO addressDTO)
+        {
+            Street = addressDTO.logradouro;
+            CEP = addressDTO.cep;
+            City = new City() { Description = addressDTO.localidade };
+        }
     }
 }

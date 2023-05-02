@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.AddressService.Data;
 using AndreTurismoApp.Models;
 using AndreTurismoApp.Models.DTOs;
-using Newtonsoft.Json;
+using AndreTurismoApp.Services;
 
 namespace AndreTurismoApp.AddressService.Controllers
 {
@@ -16,26 +16,136 @@ namespace AndreTurismoApp.AddressService.Controllers
     [ApiController]
     public class AddressesController : ControllerBase
     {
-        private readonly HttpClient _httpClient = new();
+        private readonly AndreTurismoAppAddressServiceContext _context;
+        private readonly PostOfficeService _postOfficeService;
 
-        // GET: api/Addresses/14840000
-        [HttpGet("{cep}")]
-        public async Task<AddressDTO> GetAddress(string cep)
+        public AddressesController(AndreTurismoAppAddressServiceContext context, PostOfficeService postOfficeService)
         {
+            _context = context;
+            _postOfficeService = postOfficeService;
+        }
+
+        // GET: api/Addresses
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Address>>> GetAddress()
+        {
+            if (_context.Address == null)
+            {
+                return NotFound();
+            }
+            return await _context.Address.Include(a => a.City).ToListAsync();
+        }
+
+        // GET: api/Addresses/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Address>> GetAddress(int id)
+        {
+            if (_context.Address == null)
+            {
+                return NotFound();
+            }
+            var address = await _context.Address.Include(a => a.City).Where(a => a.Id == id).FirstAsync();
+
+            if (address == null)
+            {
+                return NotFound();
+            }
+
+            return address;
+        }
+
+        [HttpGet("/api/Addresses/cep/{cep}", Name = "Get By CEP")]
+        public async Task<Address> GetAddressCEP(string cep)
+        {
+            AddressDTO addressDto = _postOfficeService.GetCep(cep).Result;
+
+            Address fullAddress = new(addressDto);
+
+            fullAddress.Complement = addressDto.complemento;
+            fullAddress.Neighborhood = addressDto.bairro;
+
+            return fullAddress;
+        }
+
+        // PUT: api/Addresses/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAddress(int id, Address address)
+        {
+            if (id != address.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(address).State = EntityState.Modified;
+
             try
             {
-                HttpResponseMessage response = await _httpClient.GetAsync($"https://viacep.com.br/ws/{cep}/json/");
-                response.EnsureSuccessStatusCode();
-
-                string addressResponse = await response.Content.ReadAsStringAsync();
-                var address = JsonConvert.DeserializeObject<AddressDTO>(addressResponse);
-
-                return address;
+                await _context.SaveChangesAsync();
             }
-            catch (HttpRequestException e)
+            catch (DbUpdateConcurrencyException)
             {
-                throw e;
+                if (!AddressExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
+
+            return Ok();
+        }
+
+        // POST: api/Addresses
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPost(Name = "Create Address")]
+        public async Task<ActionResult<Address>> PostAddress(CreateAddressDTO createAddressDTO)
+        {
+            if (_context.Address == null)
+            {
+                return Problem("Entity set 'AndreTurismoAppAddressServiceContext.Address'  is null.");
+            }
+
+            AddressDTO addressDto = _postOfficeService.GetCep(createAddressDTO.CEP).Result;
+
+            Address fullAddress = new(addressDto);
+
+            fullAddress.Complement = addressDto.complemento;
+            fullAddress.Neighborhood = addressDto.bairro;
+            fullAddress.Number = createAddressDTO.Number;
+            fullAddress.DateCreated = DateTime.Now;
+
+            _context.Address.Add(fullAddress);
+            await _context.SaveChangesAsync();
+
+            return fullAddress;
+        }
+
+        // DELETE: api/Addresses/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAddress(int id)
+        {
+            if (_context.Address == null)
+            {
+                return NotFound();
+            }
+            var address = await _context.Address.FindAsync(id);
+            if (address == null)
+            {
+                return NotFound();
+            }
+
+            _context.Address.Remove(address);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool AddressExists(int id)
+        {
+            return (_context.Address?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
