@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AndreTurismoApp.Models
+namespace AndreTurismoApp.Models.DTOs
 {
-    public class Customer
+    public class CreateCustomerDTO
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
-        public Address Address { get; set; }
-        public DateTime DateCreated { get; set; }
+        public string CEP { get; set; }
+        public int Number { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace AndreTurismoApp.Models
         public Hotel Hotel { get; set; }
         public Ticket Ticket { get; set; }
         public double Price { get; set; }
-        public Client Client { get; set; }
+        public Customer Customer { get; set; }
         public DateTime DateCreated { get; set; }
     }
 }
