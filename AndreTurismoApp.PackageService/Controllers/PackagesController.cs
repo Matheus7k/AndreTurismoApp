@@ -58,6 +58,7 @@ namespace AndreTurismoApp.PackageService.Controllers
                                          .Include(p => p.Ticket.Destination.City)
                                          .Include(p => p.Ticket.Customer.Address.City)
                                          .Include(p => p.Customer.Address.City)
+                                         .Where(p => p.Id == id)
                                          .FirstAsync();
 
             if (package == null)
@@ -71,7 +72,7 @@ namespace AndreTurismoApp.PackageService.Controllers
         // PUT: api/Packages/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPackage(int id, Package package)
+        public async Task<ActionResult<Package>> PutPackage(int id, Package package)
         {
             if (id != package.Id)
             {
@@ -125,7 +126,7 @@ namespace AndreTurismoApp.PackageService.Controllers
 
         // DELETE: api/Packages/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePackage(int id)
+        public async Task<ActionResult<Package>> DeletePackage(int id)
         {
             if (_context.Package == null)
             {
