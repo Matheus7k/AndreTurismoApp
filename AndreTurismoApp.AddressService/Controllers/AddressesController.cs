@@ -59,12 +59,33 @@ namespace AndreTurismoApp.AddressService.Controllers
         {
             AddressDTO addressDto = _postOfficeService.GetCep(cep).Result;
 
+            City city = await _context.City.Where(c => c.Description == addressDto.localidade).FirstAsync();
+
             Address fullAddress = new(addressDto);
 
             fullAddress.Complement = addressDto.complemento;
             fullAddress.Neighborhood = addressDto.bairro;
+            fullAddress.DateCreated = DateTime.Now;
 
-            return fullAddress;
+            if (city != null)
+            {
+                fullAddress.City = city;
+
+                _context.Entry(fullAddress).State = EntityState.Modified;
+                _context.Address.Add(fullAddress);
+                await _context.SaveChangesAsync();
+
+                return fullAddress;
+            }
+            else
+            {
+                fullAddress.City = new City() { Description = addressDto.localidade };
+
+                _context.Address.Add(fullAddress);
+                await _context.SaveChangesAsync();
+
+                return fullAddress;
+            }
         }
 
         // PUT: api/Addresses/5
@@ -117,10 +138,27 @@ namespace AndreTurismoApp.AddressService.Controllers
             fullAddress.Number = createAddressDTO.Number;
             fullAddress.DateCreated = DateTime.Now;
 
-            _context.Address.Add(fullAddress);
-            await _context.SaveChangesAsync();
+            City city = await _context.City.Where(c => c.Description == addressDto.localidade).FirstOrDefaultAsync();
 
-            return fullAddress;
+            if (city != null)
+            {                
+                fullAddress.City = city;
+
+                _context.Entry(fullAddress).State = EntityState.Modified;
+                _context.Address.Add(fullAddress);
+                await _context.SaveChangesAsync();
+
+                return fullAddress;
+            }
+            else
+            {
+                fullAddress.City = new City() { Description = addressDto.localidade };
+
+                _context.Address.Add(fullAddress);
+                await _context.SaveChangesAsync();
+
+                return fullAddress;
+            }                       
         }
 
         // DELETE: api/Addresses/5
