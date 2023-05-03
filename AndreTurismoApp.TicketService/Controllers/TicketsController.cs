@@ -60,7 +60,7 @@ namespace AndreTurismoApp.TicketService.Controllers
         // PUT: api/Tickets/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTicket(int id, Ticket ticket)
+        public async Task<ActionResult<Ticket>> PutTicket(int id, Ticket ticket)
         {
             if (id != ticket.Id)
             {
@@ -97,15 +97,25 @@ namespace AndreTurismoApp.TicketService.Controllers
           {
               return Problem("Entity set 'AndreTurismoAppTicketServiceContext.Ticket'  is null.");
           }
-            _context.Ticket.Add(ticket);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTicket", new { id = ticket.Id }, ticket);
+            try
+            {
+                _context.Entry(ticket).State = EntityState.Modified;
+                _context.Ticket.Add(ticket);
+                await _context.SaveChangesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return ticket;
         }
 
         // DELETE: api/Tickets/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTicket(int id)
+        public async Task<ActionResult<Ticket>> DeleteTicket(int id)
         {
             if (_context.Ticket == null)
             {
