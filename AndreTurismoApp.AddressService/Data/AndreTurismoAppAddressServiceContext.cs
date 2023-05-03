@@ -15,5 +15,6 @@ namespace AndreTurismoApp.AddressService.Data
         }
 
         public DbSet<AndreTurismoApp.Models.Address> Address { get; set; } = default!;
+        public DbSet<AndreTurismoApp.Models.City> City { get; set; } = default!;
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreTurismoApp.Models;
 using AndreTurismoApp.PackageService.Data;
+using System.Net.Sockets;
 
 namespace AndreTurismoApp.PackageService.Controllers
 {
@@ -25,32 +26,37 @@ namespace AndreTurismoApp.PackageService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Package>>> GetPackage()
         {
-          if (_context.Package == null)
-          {
-              return NotFound();
-          }
-            return await _context.Package.Include(p => p.Hotel.Address.City)
-                                         .Include(p => p.Ticket.Origin)
-                                         .Include(p => p.Ticket.Destination)
+            if (_context.Package == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                return await _context.Package.Include(p => p.Hotel.Address.City)
+                                         .Include(p => p.Ticket.Origin.City)
+                                         .Include(p => p.Ticket.Destination.City)
                                          .Include(p => p.Ticket.Customer.Address.City)
-                                         .Include(p => p.Ticket.Price)
                                          .Include(p => p.Customer.Address.City)
                                          .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         // GET: api/Packages/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Package>> GetPackage(int id)
         {
-          if (_context.Package == null)
-          {
-              return NotFound();
-          }
+            if (_context.Package == null)
+            {
+                return NotFound();
+            }
             var package = await _context.Package.Include(p => p.Hotel.Address.City)
-                                         .Include(p => p.Ticket.Origin)
-                                         .Include(p => p.Ticket.Destination)
+                                         .Include(p => p.Ticket.Origin.City)
+                                         .Include(p => p.Ticket.Destination.City)
                                          .Include(p => p.Ticket.Customer.Address.City)
-                                         .Include(p => p.Ticket.Price)
                                          .Include(p => p.Customer.Address.City)
                                          .Where(p => p.Id == id)
                                          .FirstAsync();
@@ -66,7 +72,7 @@ namespace AndreTurismoApp.PackageService.Controllers
         // PUT: api/Packages/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPackage(int id, Package package)
+        public async Task<ActionResult<Package>> PutPackage(int id, Package package)
         {
             if (id != package.Id)
             {
@@ -99,19 +105,28 @@ namespace AndreTurismoApp.PackageService.Controllers
         [HttpPost]
         public async Task<ActionResult<Package>> PostPackage(Package package)
         {
-          if (_context.Package == null)
-          {
-              return Problem("Entity set 'AndreTurismoAppPackageServiceContext.Package'  is null.");
-          }
-            _context.Package.Add(package);
-            await _context.SaveChangesAsync();
+            if (_context.Package == null)
+            {
+                return Problem("Entity set 'AndreTurismoAppPackageServiceContext.Package'  is null.");
+            }
 
-            return CreatedAtAction("GetPackage", new { id = package.Id }, package);
+            try
+            {
+                _context.Entry(package).State = EntityState.Modified;
+                _context.Package.Add(package);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return package;
         }
 
         // DELETE: api/Packages/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePackage(int id)
+        public async Task<ActionResult<Package>> DeletePackage(int id)
         {
             if (_context.Package == null)
             {

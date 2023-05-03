@@ -7,19 +7,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp", "AndreTur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.Models", "AndreTurismoApp.Models\AndreTurismoApp.Models.csproj", "{65F78152-8C51-4809-8803-9B93F3849886}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.Repositories", "AndreTurismoApp.Repositories\AndreTurismoApp.Repositories.csproj", "{450269EE-B104-4BE8-9447-798CC2ABDAE1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.Services", "AndreTurismoApp.Services\AndreTurismoApp.Services.csproj", "{959E2E93-9FDE-489B-8E28-026315903C44}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.AddressService", "AndreTurismoApp.AddressService\AndreTurismoApp.AddressService.csproj", "{1F982A28-6827-42A9-883F-3F3CC44CFA77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.CustomerService", "AndreTurismoApp.CustomerService\AndreTurismoApp.CustomerService.csproj", "{4D40CE49-629B-45BB-AD35-872A8AE103C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.CustomerService", "AndreTurismoApp.CustomerService\AndreTurismoApp.CustomerService.csproj", "{4D40CE49-629B-45BB-AD35-872A8AE103C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.HotelService", "AndreTurismoApp.HotelService\AndreTurismoApp.HotelService.csproj", "{FE0F5BBB-608D-4099-9405-BA486AE27170}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.HotelService", "AndreTurismoApp.HotelService\AndreTurismoApp.HotelService.csproj", "{FE0F5BBB-608D-4099-9405-BA486AE27170}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.TicketService", "AndreTurismoApp.TicketService\AndreTurismoApp.TicketService.csproj", "{1B1829FA-042E-4251-B131-4102F8E6ACCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.TicketService", "AndreTurismoApp.TicketService\AndreTurismoApp.TicketService.csproj", "{1B1829FA-042E-4251-B131-4102F8E6ACCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.PackageService", "AndreTurismoApp.PackageService\AndreTurismoApp.PackageService.csproj", "{D1C7FA18-588E-4A0D-87C7-6E3F2BFCAE07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AndreTurismoApp.PackageService", "AndreTurismoApp.PackageService\AndreTurismoApp.PackageService.csproj", "{D1C7FA18-588E-4A0D-87C7-6E3F2BFCAE07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.Teste", "AndreTurismoApp.Teste\AndreTurismoApp.Teste.csproj", "{B10BC47F-8149-4FF8-8FD8-B7804C619AE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AndreTurismoApp.Service", "AndreTurismoApp.Service\AndreTurismoApp.Service.csproj", "{ABACC88A-8504-453D-B111-716F52E319D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,14 +35,6 @@ Global
 		{65F78152-8C51-4809-8803-9B93F3849886}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65F78152-8C51-4809-8803-9B93F3849886}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65F78152-8C51-4809-8803-9B93F3849886}.Release|Any CPU.Build.0 = Release|Any CPU
-		{450269EE-B104-4BE8-9447-798CC2ABDAE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{450269EE-B104-4BE8-9447-798CC2ABDAE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{450269EE-B104-4BE8-9447-798CC2ABDAE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{450269EE-B104-4BE8-9447-798CC2ABDAE1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{959E2E93-9FDE-489B-8E28-026315903C44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{959E2E93-9FDE-489B-8E28-026315903C44}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{959E2E93-9FDE-489B-8E28-026315903C44}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{959E2E93-9FDE-489B-8E28-026315903C44}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1F982A28-6827-42A9-883F-3F3CC44CFA77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1F982A28-6827-42A9-883F-3F3CC44CFA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F982A28-6827-42A9-883F-3F3CC44CFA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -63,6 +55,14 @@ Global
 		{D1C7FA18-588E-4A0D-87C7-6E3F2BFCAE07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1C7FA18-588E-4A0D-87C7-6E3F2BFCAE07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1C7FA18-588E-4A0D-87C7-6E3F2BFCAE07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B10BC47F-8149-4FF8-8FD8-B7804C619AE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B10BC47F-8149-4FF8-8FD8-B7804C619AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B10BC47F-8149-4FF8-8FD8-B7804C619AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B10BC47F-8149-4FF8-8FD8-B7804C619AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABACC88A-8504-453D-B111-716F52E319D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABACC88A-8504-453D-B111-716F52E319D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABACC88A-8504-453D-B111-716F52E319D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABACC88A-8504-453D-B111-716F52E319D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

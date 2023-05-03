@@ -54,7 +54,7 @@ namespace AndreTurismoApp.CustomerService.Controllers
         // PUT: api/Customers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(int id, Customer customer)
+        public async Task<ActionResult<Customer>> PutCustomer(int id, Customer customer)
         {
             if (id != customer.Id)
             {
@@ -92,6 +92,7 @@ namespace AndreTurismoApp.CustomerService.Controllers
                 return Problem("Entity set 'AndreTurismoAppCustomerServiceContext.Customer'  is null.");
             }
 
+            _context.Entry(customer).State = EntityState.Modified;
             _context.Customer.Add(customer);
             await _context.SaveChangesAsync();
 
@@ -100,7 +101,7 @@ namespace AndreTurismoApp.CustomerService.Controllers
 
         // DELETE: api/Customers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCustomer(int id)
+        public async Task<ActionResult<Customer>> DeleteCustomer(int id)
         {
             if (_context.Customer == null)
             {

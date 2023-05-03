@@ -25,10 +25,10 @@ namespace AndreTurismoApp.HotelService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel()
         {
-          if (_context.Hotel == null)
-          {
-              return NotFound();
-          }
+            if (_context.Hotel == null)
+            {
+                return NotFound();
+            }
             return await _context.Hotel.Include(h => h.Address.City).ToListAsync();
         }
 
@@ -36,10 +36,10 @@ namespace AndreTurismoApp.HotelService.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Hotel>> GetHotel(int id)
         {
-          if (_context.Hotel == null)
-          {
-              return NotFound();
-          }
+            if (_context.Hotel == null)
+            {
+                return NotFound();
+            }
             var hotel = await _context.Hotel.Include(h => h.Address.City).Where(h => h.Id == id).FirstAsync();
 
             if (hotel == null)
@@ -53,7 +53,7 @@ namespace AndreTurismoApp.HotelService.Controllers
         // PUT: api/Hotels/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutHotel(int id, Hotel hotel)
+        public async Task<ActionResult<Hotel>> PutHotel(int id, Hotel hotel)
         {
             if (id != hotel.Id)
             {
@@ -86,19 +86,21 @@ namespace AndreTurismoApp.HotelService.Controllers
         [HttpPost]
         public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
-          if (_context.Hotel == null)
-          {
-              return Problem("Entity set 'AndreTurismoAppHotelServiceContext.Hotel'  is null.");
-          }
+            if (_context.Hotel == null)
+            {
+                return Problem("Entity set 'AndreTurismoAppHotelServiceContext.Hotel'  is null.");
+            }
+
+            _context.Entry(hotel).State = EntityState.Modified;
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetHotel", new { id = hotel.Id }, hotel);
+            return hotel;
         }
 
         // DELETE: api/Hotels/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHotel(int id)
+        public async Task<ActionResult<Hotel>> DeleteHotel(int id)
         {
             if (_context.Hotel == null)
             {
