@@ -35,12 +35,6 @@ namespace AndreTurismoApp.Controllers
             Address addressDestination = _addressService.GetAddressCEP(ticketDto.Destination.CEP).Result;
             Customer customer = _customerService.GetCustomerId(ticketDto.CustomerId).Result;
 
-            /*
-            customer.Id = 0;
-            customer.Address.Id = 0;
-            customer.Address.City.Id = 0;
-            */
-
             addressOrigin.Number = ticketDto.Origin.Number;
             addressDestination.Number = ticketDto.Origin.Number;
 
