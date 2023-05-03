@@ -6,8 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AndreTurismoApp.Repositories\AndreTurismoApp.Repositories.csproj" />
-  </ItemGroup>
-
 </Project>
