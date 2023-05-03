@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using AndreTurismoApp.Models;
-using AndreTurismoApp.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
