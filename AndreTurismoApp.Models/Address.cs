@@ -31,7 +31,6 @@ namespace AndreTurismoApp.Models
         {
             Street = addressDTO.logradouro;
             CEP = addressDTO.cep;
-            City = new City() { Description = addressDTO.localidade };
         }
     }
 }
