@@ -92,6 +92,7 @@ namespace AndreTurismoApp.CustomerService.Controllers
                 return Problem("Entity set 'AndreTurismoAppCustomerServiceContext.Customer'  is null.");
             }
 
+            _context.Entry(customer).State = EntityState.Modified;
             _context.Customer.Add(customer);
             await _context.SaveChangesAsync();
 

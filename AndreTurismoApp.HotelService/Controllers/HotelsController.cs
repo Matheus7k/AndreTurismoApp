@@ -25,10 +25,10 @@ namespace AndreTurismoApp.HotelService.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetHotel()
         {
-          if (_context.Hotel == null)
-          {
-              return NotFound();
-          }
+            if (_context.Hotel == null)
+            {
+                return NotFound();
+            }
             return await _context.Hotel.Include(h => h.Address.City).ToListAsync();
         }
 
@@ -36,10 +36,10 @@ namespace AndreTurismoApp.HotelService.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Hotel>> GetHotel(int id)
         {
-          if (_context.Hotel == null)
-          {
-              return NotFound();
-          }
+            if (_context.Hotel == null)
+            {
+                return NotFound();
+            }
             var hotel = await _context.Hotel.Include(h => h.Address.City).Where(h => h.Id == id).FirstAsync();
 
             if (hotel == null)
@@ -86,10 +86,12 @@ namespace AndreTurismoApp.HotelService.Controllers
         [HttpPost]
         public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
         {
-          if (_context.Hotel == null)
-          {
-              return Problem("Entity set 'AndreTurismoAppHotelServiceContext.Hotel'  is null.");
-          }
+            if (_context.Hotel == null)
+            {
+                return Problem("Entity set 'AndreTurismoAppHotelServiceContext.Hotel'  is null.");
+            }
+
+            _context.Entry(hotel).State = EntityState.Modified;
             _context.Hotel.Add(hotel);
             await _context.SaveChangesAsync();
 
